@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./nextcloud.nix
     ];
+# System Settings
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -35,6 +36,8 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+# Networking
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -66,10 +69,12 @@
 
   # Packages - System Profile
   environment.systemPackages = with pkgs; [
+   fastfetch
    neovim
    wget
    curl
    git
+   btop
   ];
 
 # SUID Wrappers
