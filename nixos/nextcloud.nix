@@ -3,12 +3,12 @@
 {
   services = {
     nginx.virtualHosts = {
-      "cloud.example.com" = {
+      "cloud.nixi.com" = {
         forceSSL = true;
         enableACME = true;
       };
 
-      "onlyoffice.example.com" = {
+      "office.nixi.com" = {
         forceSSL = true;
         enableACME = true;
       };
@@ -16,10 +16,10 @@
 
     nextcloud = {
       enable = true;
-      hostName = "cloud.example.com";
+      hostName = "cloud.nixi.com";
 
        # Need to manually increment with every major upgrade.
-      package = pkgs.nextcloud27;
+      package = pkgs.nextcloud29;
 
       # Let NixOS install and configure the database automatically.
       database.createLocally = true;
@@ -58,7 +58,7 @@
 
     onlyoffice = {
       enable = true;
-      hostname = "onlyoffice.example.com";
+      hostname = "office.nixi.com";
     };
   };
 }
