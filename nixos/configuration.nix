@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./nextcloud.nix
+      ./nextcloud.nix
       #<agenix/modules/age.nix>
     ];
     
