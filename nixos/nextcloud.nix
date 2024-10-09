@@ -3,12 +3,12 @@
 {
   services = {
     nginx.virtualHosts = {
-      "cloud.nixi.com" = {
+      "cloud" = {
         forceSSL = true;
         enableACME = true;
       };
 
-      "office.nixi.com" = {
+      "office" = {
         forceSSL = true;
         enableACME = true;
       };
@@ -16,7 +16,7 @@
 
     nextcloud = {
       enable = true;
-      hostName = "cloud.nixi.com";
+      hostName = "cloud";
 
        # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud29;
@@ -40,11 +40,11 @@
         inherit calendar contacts mail notes onlyoffice tasks;
 
         # Custom app installation example.
-        cookbook = pkgs.fetchNextcloudApp rec {
-          url =
-            "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
-          sha256 = "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=";
-        };
+        #cookbook = pkgs.fetchNextcloudApp rec {
+        #  url =
+        #    "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
+        #  sha256 = "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=";
+        #};
       };
 
       config = {
@@ -58,7 +58,7 @@
 
     onlyoffice = {
       enable = true;
-      hostname = "office.nixi.com";
+      hostname = "office";
     };
   };
 }
