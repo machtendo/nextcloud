@@ -39,7 +39,7 @@
 
 # Networking
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "forge"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -56,9 +56,9 @@
   # networking.firewall.enable = false;
   
 # Users
-  users.users.jas = {
+  users.users.admin = {
     isNormalUser = true;
-    description = "Jason";
+    description = "Administrator";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     ];
@@ -88,6 +88,7 @@
 
   # OpenSSH
   services.openssh.enable = true;
+  services.openssh.passwordAuthentication = true;
 
   # Tailscale
   services.tailscale.enable = true;
