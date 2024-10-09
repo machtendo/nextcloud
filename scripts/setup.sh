@@ -28,6 +28,8 @@
 
 # NixOS Secrets Management - agenix
 
+    echo "Installing agenix..."
+
     # Add agenix Channel
     sudo nix-channel --add https://github.com/ryantm/agenix/archive/main.tar.gz agenix
 
