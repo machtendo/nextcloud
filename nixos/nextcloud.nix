@@ -60,4 +60,18 @@
       hostname = "office";
     };
   };
+  
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "machtendo@outlook.com";
+  # certs."mx1.example.org" = {
+  # dnsProvider = "inwx";
+    # Supplying password files like this will make your credentials world-readable
+    # in the Nix store. This is for demonstration purpose only, do not use this in production.
+    # environmentFile = "${pkgs.writeText "inwx-creds" ''
+    #  INWX_USERNAME=xxxxxxxxxx
+    #  INWX_PASSWORD=yyyyyyyyyy
+    # ''}";
+   #};
+  };
 }
