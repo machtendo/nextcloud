@@ -52,7 +52,7 @@
         defaultPhoneRegion = "PT";
         dbtype = "pgsql";
         adminuser = "admin";
-        adminpassFile = "/path/to/nextcloud-admin-pass";
+        adminpassFile = "~/.secrets/nextcloud.age";
       };
     };
 
