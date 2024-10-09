@@ -26,6 +26,14 @@
     # Install Home Manager
     nix-shell '<home-manager>' -A install
 
+# NixOS Secrets Management - agenix
+
+    # Add agenix Channel
+    sudo nix-channel --add https://github.com/ryantm/agenix/archive/main.tar.gz agenix
+
+    # Update Channels
+    sudo nix-channel --update
+
 # Install Plasma Manager - Needs Testing
 
     #    echo "Installing Plasma Manager..."
