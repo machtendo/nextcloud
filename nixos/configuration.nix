@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./nextcloud.nix
-      <agenix/modules/age.nix>
+      #<agenix/modules/age.nix>
     ];
     
 # System Settings
@@ -52,7 +52,7 @@
   networking.networkmanager.enable = true;
 
 # Firewall
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
