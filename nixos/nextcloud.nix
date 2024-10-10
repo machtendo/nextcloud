@@ -1,14 +1,14 @@
 { self, config, lib, pkgs, ... }: {
   # Based on https://carjorvaz.com/posts/the-holy-grail-nextcloud-setup-made-easy-by-nixos/
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "machtendo@outlook.com";
+  #security.acme = {
+    #acceptTerms = true;
+    #defaults = {
+      #email = "machtendo@outlook.com";
       #dnsProvider = "cloudflare";
       # location of your CLOUDFLARE_DNS_API_TOKEN=[value]
       # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
       #environmentFile = "/REPLACE/WITH/YOUR/PATH";
-    };
+    #};
   };
   services = {
     nginx.virtualHosts = {
