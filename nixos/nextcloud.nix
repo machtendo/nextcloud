@@ -9,7 +9,7 @@
       # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
       #environmentFile = "/REPLACE/WITH/YOUR/PATH";
     #};
-  };
+  #};
   services = {
     nginx.virtualHosts = {
       "machtendo.net" = {
