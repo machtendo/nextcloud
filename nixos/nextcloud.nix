@@ -1,77 +1,67 @@
-{ self, config, lib, pkgs, ... }:
-
-{
+{ self, config, lib, pkgs, ... }: {
+  # Based on https://carjorvaz.com/posts/the-holy-grail-nextcloud-setup-made-easy-by-nixos/
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "machtendo@outlook.com";
+      dnsProvider = "cloudflare";
+      # location of your CLOUDFLARE_DNS_API_TOKEN=[value]
+      # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
+      #environmentFile = "/REPLACE/WITH/YOUR/PATH";
+    };
+  };
   services = {
     nginx.virtualHosts = {
-      "cloud" = {
+      "machtendo.net" = {
         forceSSL = true;
         enableACME = true;
-      };
-
-      "office" = {
-        forceSSL = true;
-        enableACME = true;
+        # Use DNS Challenege.
+        acmeRoot = null;
       };
     };
-
+    # 
     nextcloud = {
       enable = true;
-      hostName = "cloud";
-
-       # Need to manually increment with every major upgrade.
+      hostName = "cloud.machtendo.net";
+      # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud30;
-
       # Let NixOS install and configure the database automatically.
       database.createLocally = true;
-
       # Let NixOS install and configure Redis caching automatically.
       configureRedis = true;
-
-      # Increase the maximum file upload size to avoid problems uploading videos.
+      # Increase the maximum file upload size.
       maxUploadSize = "16G";
       https = true;
-
       autoUpdateApps.enable = true;
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
         # List of apps we want to install and are already packaged in
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-        inherit calendar contacts mail notes onlyoffice tasks;
-
-        # Custom app installation example.
-        #cookbook = pkgs.fetchNextcloudApp rec {
+        inherit calendar contacts notes onlyoffice tasks cookbook qownnotesapi;
+        # Custom app example.
+        #socialsharing_telegram = pkgs.fetchNextcloudApp rec {
         #  url =
-        #    "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
-        #  sha256 = "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=";
+        #    "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.0.1/socialsharing_telegram-v3.0.1.tar.gz";
+        #  license = "agpl3";
+        #  sha256 = "sha256-8XyOslMmzxmX2QsVzYzIJKNw6rVWJ7uDhU1jaKJ0Q8k=";
         #};
       };
-
-      config = {
+      settings = {
         overwriteProtocol = "https";
-        defaultPhoneRegion = "PT";
+        default_phone_region = "US";
+      };
+      config = {
         dbtype = "pgsql";
         adminuser = "admin";
-        adminpassFile = "~/.secrets/nextcloud.age";
+        adminpassFile = "~/.pgpass";
       };
+      # Suggested by Nextcloud's health check.
+      phpOptions."opcache.interned_strings_buffer" = "16";
     };
-
-    onlyoffice = {
+    # Nightly database backups.
+    postgresqlBackup = {
       enable = true;
-      hostname = "office";
+      startAt = "*-*-* 01:15:00";
     };
-  };
-  
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "machtendo@outlook.com";
-  # certs."mx1.example.org" = {
-  # dnsProvider = "inwx";
-    # Supplying password files like this will make your credentials world-readable
-    # in the Nix store. This is for demonstration purpose only, do not use this in production.
-    # environmentFile = "${pkgs.writeText "inwx-creds" ''
-    #  INWX_USERNAME=xxxxxxxxxx
-    #  INWX_PASSWORD=yyyyyyyyyy
-    # ''}";
-   #};
   };
 }
