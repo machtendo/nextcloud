@@ -12,7 +12,7 @@
   #};
   services = {
     nginx.virtualHosts = {
-      "machtendo.net" = {
+      "proxy.tech-forge.online" = {
         forceSSL = true;
         enableACME = true;
         # Use DNS Challenege.
@@ -22,7 +22,7 @@
     # 
     nextcloud = {
       enable = true;
-      hostName = "cloud.machtendo.net";
+      hostName = "cloud.tech-forge.online";
       # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud30;
       # Let NixOS install and configure the database automatically.
